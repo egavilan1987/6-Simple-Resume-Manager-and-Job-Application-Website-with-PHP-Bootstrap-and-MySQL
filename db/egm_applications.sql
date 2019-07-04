@@ -10,7 +10,7 @@ CREATE TABLE tbl_candidates(
 	candidate_email VARCHAR(50) NOT NULL,
 	candidate_phone VARCHAR(10) NOT NULL,
 	candidate_address VARCHAR(100) NOT NULL,
-             candidate_resume VARCHAR(50) NOT NULL,
+        candidate_resume VARCHAR(50) NOT NULL,
 	created_date DATETIME NOT NULL,
 	PRIMARY KEY(id_contact)
 );
@@ -20,7 +20,8 @@ CREATE TABLE tbl_positions(
 	id_user INT NOT NULL,
 	position_name VARCHAR(50) NOT NULL,
 	position_description VARCHAR(50) NOT NULL,
-	position_requirement VARCHAR(50) NOT NULL,	created_date DATETIME NOT NULL,
+	position_requirement VARCHAR(50) NOT NULL,	
+	created_date DATETIME NOT NULL,
 	PRIMARY KEY(id_position)
 );
 
