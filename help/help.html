@@ -1,22 +1,79 @@
-egm_application.sql
-Job application form
+Simple Resumes Manager and Job Application Website with PHP, Bootstrap and MySQL
 
-Candidates
-First name *
-Last name *
-Email *
-Phone *
-Address *
-Attach Resume *
-Note
+HOME, JOB, RESUMES, USERS, LOG OUT
+             Copyright c 2019 EGMedia
 
-SUBMIT APPLICATION
+Titles
+Job Information
+Manage Resumes
+Manage Users
 
-Positions (Job Detail)
-Name *
-Description *
-Requirements *
+Application Description
+- Candidates management
+- Employer managemen
+- Job Management
 
-Users
-name *
-password *
+Technologies
+- Front end
+-Back end
+
+Resume Manager Online
+Send Resume Online
+Download the code
+
+Folder structure
+egm_applications.sql
+
+jobApplication.php
+index.php
+candidates.php
+jobs.php
+users.php
+logout.php
+---------------------------------------
+1-Planning
+2-Database
+3-Job Application Website
+   3.1 - Design
+   3.2 - Send Information 
+4-Resume Application Management
+   4.1 - Users management
+   4.2 - Application management
+   4.3 - Resume management
+
+
+------------------------------------------------------------
+CREATE DATABASE egm_applications;
+
+USE egm_applications;
+
+CREATE TABLE tbl_users(
+	id_user INT NOT NULL AUTO_INCREMENT,
+	user_firstname VARCHAR(50) NOT NULL,
+	user_lastname VARCHAR(50) NOT NULL,
+	user_email VARCHAR(50) NOT NULL,
+	user_name VARCHAR(50) NOT NULL,
+	user_password text(50) NOT NULL,
+	created_date DATETIME NOT NULL,
+	PRIMARY KEY(id_user)
+	);
+CREATE TABLE tbl_candidates(
+	id_candidate INT(11) NOT NULL AUTO_INCREMENT,
+	candidate_firstname VARCHAR(50) NOT NULL,
+	candidate_lastname VARCHAR(50) NOT NULL,
+	candidate_email VARCHAR(50) NOT NULL,
+	candidate_phone VARCHAR(10) NOT NULL,
+	candidate_address VARCHAR(100) NOT NULL,
+             candidate_resume VARCHAR(50) NOT NULL,
+	created_date DATETIME NOT NULL,
+	PRIMARY KEY(id_contact)
+);
+CREATE TABLE tbl_positions(
+	id_position INT(11) NOT NULL AUTO_INCREMENT,
+	id_user INT NOT NULL,
+	position_name VARCHAR(50) NOT NULL,
+	position_description VARCHAR(1000) NOT NULL,
+	position_requirement VARCHAR(1000) NOT NULL,	
+             created_date DATETIME NOT NULL,
+	PRIMARY KEY(id_position)
+);
