@@ -99,7 +99,23 @@
           <h2 class="mt-0">Apply For This Job</h2>
           <hr class="divider my-4">
           <div class="text-left">
-            <form id="formContact">
+            <form id="frmContact">
+
+                <div id="alert_error_message" class="alert alert-danger collapse" role="alert">
+                  <i class="fa fa-exclamation-triangle"></i>
+                  <strong>Alert!</strong> Please check in on some of the fields below.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                   </button>
+                </div>
+                <div id="alert_sucess_message" class="alert alert-success collapse" role="alert">                  
+                   Information successfully sent!
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+
               <div class="form-group">
                 <label for="exampleInputEmail1">Fist Name</label>
                 <input type="text" class="form-control" id="firstname" placeholder="Enter first name">
@@ -281,7 +297,14 @@
 
 
           if (error_firstname == false && error_lastname == false && error_email == false && error_phone == false && error_address == false) {
-            alert("Ready to go!");
+            
+
+
+            $("#alert_sucess_message").show();
+            $("#alert_error_message").hide();
+            $('#frmContact')[0].reset();  
+
+
               data = $('#formContact').serialize();
               $.ajax({
                   type: "POST",
@@ -293,6 +316,7 @@
                           $("#alert_error_message").hide();
                           $('#formContact')[0].reset();
                       } else {
+                          alert("Something wrong went throught, please try later.")
                           $("#alert_sucess_message").hide();
                           $("#alert_error_message").show();
                       }
