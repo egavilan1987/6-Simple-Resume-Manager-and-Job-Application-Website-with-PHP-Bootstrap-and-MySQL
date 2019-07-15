@@ -118,27 +118,27 @@
 
               <div class="form-group">
                 <label for="exampleInputEmail1">Fist Name</label>
-                <input type="text" class="form-control" id="firstname" placeholder="Enter first name">
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter first name">
                 <div id="firstname_error_message" class="text-danger"></div>
               </div>
               <div class="form-group">
                 <label>Last Name</label>
-                <input type="text" class="form-control" id="lastname" placeholder="Enter last name">
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter last name">
                 <div id="lastname_error_message" class="text-danger"></div>
               </div>
               <div class="form-group">
                 <label>E-mail</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter first email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter first email">
                 <div id="email_error_message" class="text-danger"></div>
               </div>
               <div class="form-group">
                 <label>Phone</label>
-                <input type="text" class="form-control" id="phone" placeholder="Enter last phone">
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter last phone">
                 <div id="phone_error_message" class="text-danger"></div>
               </div>
               <div class="form-group">
                 <label>Address</label>
-                <input type="text" class="form-control" id="address" placeholder="Enter first address">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Enter first address">
                 <div id="address_error_message" class="text-danger"></div>
               </div>
               <div class="form-group">
@@ -152,6 +152,7 @@
                 -->
               </div>              
               <button type="button" id="submit" class="btn btn-primary btn-block">SUBMIT APPLICATION</button>
+
             </form>
           </div>
         </div>
@@ -300,21 +301,20 @@
             
 
 
-            $("#alert_sucess_message").show();
-            $("#alert_error_message").hide();
-            $('#frmContact')[0].reset();  
 
 
-              data = $('#formContact').serialize();
+
+              data = $('#frmContact').serialize();
+              
               $.ajax({
                   type: "POST",
                   data: data,
-                  url: "../process/contacts/addMessage.php",
-                  success: function(r) {
+                  url: "candidate.php",
+                  success: function(r) { alert(r);
                       if (r == 1) {
                           $("#alert_sucess_message").show();
                           $("#alert_error_message").hide();
-                          $('#formContact')[0].reset();
+                          $('#frmContact')[0].reset();
                       } else {
                           alert("Something wrong went throught, please try later.")
                           $("#alert_sucess_message").hide();
@@ -329,4 +329,12 @@
           }
       }
   });
+
+
+
+
+
+
+
+
 </script>
