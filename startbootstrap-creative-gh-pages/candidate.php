@@ -1,43 +1,43 @@
 <?php
 
+  require_once "connection.php";
 
-   if($_POST["action"] == "Add")
-   {
-    $data = array(
-     ':teacher_name'    => $teacher_name,
-     ':teacher_address'   => $teacher_address,
-     ':teacher_emailid'   => $teacher_emailid,
-     ':teacher_password'   => password_hash($teacher_password, PASSWORD_DEFAULT),
-     ':teacher_qualification' => $teacher_qualification,
-     ':teacher_doj'    => $teacher_doj,
-     ':teacher_image'   => $teacher_image,
-     ':teacher_grade_id'   => $teacher_grade_id
-    );
-    $query = "
-    INSERT INTO tbl_teacher 
-    (teacher_name, teacher_address, teacher_emailid, teacher_password, teacher_qualification, teacher_doj, teacher_image, teacher_grade_id) 
-    SELECT * FROM (SELECT :teacher_name, :teacher_address, :teacher_emailid, :teacher_password, :teacher_qualification, :teacher_doj, :teacher_image, :teacher_grade_id) as temp 
-    WHERE NOT EXISTS (
-     SELECT teacher_emailid FROM tbl_teacher WHERE teacher_emailid = :teacher_emailid
-    ) LIMIT 1
-    ";
-    $statement = $connect->prepare($query);
-    if($statement->execute($data))
-    {
-     if($statement->rowCount() > 0)
-     {
-      $output = array(
-       'success'  => 'Data Added Successfully',
-      );
-     }
-     else
-     {
-      $output = array(
-       'error'     => true,
-       'error_teacher_emailid' => 'Email Already Exists'
-      );
-     }
-    }
-   }
+  $firstname = $_POST['firstname'];
+  $lastname  = $_POST['lastname'];
+  $email     = $_POST['email'];
+  $phone     = $_POST['phone'];
+  $address   = ($_POST['address']);
+
+  $file_name      = $_FILES['resume']['name'];
+  $file_path      = $_FILES['resume']['tmp_name'];
+  $storage_folder = 'files';
+  $final_path     = $storage_folder . '/' . $file_name;
+
+  //Upload files to files' folder
+  move_uploaded_file($file_path, $final_path);
+
+  $query1 = "INSERT INTO tbl_file(file_name, file_storage_path) VALUES('$file_name','$final_path')";
+
+  $result1 = mysqli_query($connection, $query1);
+
+  $file_id = mysqli_insert_id($connection);
+
+  //insert into candidate table
+  $query2 = "INSERT INTO tbl_candidate(file_id,
+                          candidate_firstname, 
+                          candidate_lastname, 
+                          candidate_email, 
+                          candidate_phone, 
+                          candidate_address, 
+                          created_date)
+                  VALUES( '$file_id',
+                          '$firstname', 
+                          '$lastname', 
+                          '$email', 
+                          '$phone', 
+                          '$address',
+                          NOW())";
+
+  $result = mysqli_query($connection, $query2);
+
 ?>
-

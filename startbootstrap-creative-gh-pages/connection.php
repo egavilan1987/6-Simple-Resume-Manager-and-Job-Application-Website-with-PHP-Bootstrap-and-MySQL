@@ -1,7 +1,10 @@
 <?php
 
-//database_connection.php
+  // database connection
+  $connection = mysqli_connect("localhost","root","","egm_application");
 
-$connect = new PDO("mysql:host=localhost;dbname=egm_application", "root", "");
+  if(!$connection){
+    die("Connection failed: ".mysql_connect_error());
+  }
 
-?>
+ ?>

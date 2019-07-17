@@ -31,7 +31,7 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">EGM Job Application</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-strong="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -100,56 +100,51 @@
           <hr class="divider my-4">
           <div class="text-left">
             <form id="frmContact">
-
-                <div id="alert_error_message" class="alert alert-danger collapse" role="alert">
-                  <i class="fa fa-exclamation-triangle"></i>
-                  <strong>Alert!</strong> Please check in on some of the fields below.
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                   </button>
-                </div>
-                <div id="alert_sucess_message" class="alert alert-success collapse" role="alert">                  
-                   Information successfully sent!
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+              <div id="alert_error_message" class="alert alert-danger collapse" role="alert">
+                 <i class="fa fa-exclamation-triangle"></i>
+                 <strong>Alert!</strong> Please check in on some of the fields below.
+                  <button type="button" class="close" data-dismiss="alert" aria-strong="Close">
+                   <span aria-hidden="true">&times;</span>
                   </button>
-                </div>
-
-
+              </div>
+              <div id="alert_sucess_message" class="alert alert-success collapse" role="alert">                  
+                  Information successfully sent!
+                <button type="button" class="close" data-dismiss="alert" aria-strong="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Fist Name</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter first name">
+                <strong for="exampleInputEmail1">Fist Name <i class="text-danger">*</i></strong>
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter first name" maxlength="50">
                 <div id="firstname_error_message" class="text-danger"></div>
               </div>
               <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter last name">
+                <strong>Last Name <i class="text-danger">*</i></strong>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter last name" maxlength="50">
                 <div id="lastname_error_message" class="text-danger"></div>
               </div>
               <div class="form-group">
-                <label>E-mail</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter first email">
+                <strong>E-mail <i class="text-danger">*</i></strong>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter first email" maxlength="50">
                 <div id="email_error_message" class="text-danger"></div>
               </div>
               <div class="form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter last phone">
+                <strong>Phone <i class="text-danger">*</i></strong>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter last phone" maxlength="20">
                 <div id="phone_error_message" class="text-danger"></div>
               </div>
               <div class="form-group">
-                <label>Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Enter first address">
+                <strong>Address <i class="text-danger">*</i></strong>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Enter first address" maxlength="50">
                 <div id="address_error_message" class="text-danger"></div>
               </div>
               <div class="form-group">
-                <label>Resume</label>
-                <!--
+                <strong>Resume <i class="text-danger">*</i></strong>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                    <div class="invalid-feedback">Example invalid custom file feedback</div>
-                  </div> 
-                -->
+                  <input type="file" id="resume" name="resume" class="custom-file-input" accept=".pdf,.doc">
+                  <label class="custom-file-label">Choose file...</label>
+                  <div id="resume_error_message" class="text-danger"></div>
+                </div>
               </div>              
               <button type="button" id="submit" class="btn btn-primary btn-block">SUBMIT APPLICATION</button>
 
@@ -184,6 +179,17 @@
 <script>
   $(function() {
 
+      // Add the following code if you want the name of the file appear on select
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+
+      function clear(){
+        $('#frmContact')[0].reset();
+        $(".custom-file-input").siblings(".custom-file-label").addClass("selected").html("Choose file...");
+      }
+
       $('#submit').click(function(){
         submit();
       });
@@ -193,6 +199,7 @@
       var error_email = false;
       var error_phone = false;
       var error_address= false;
+      var error_resume= false;
 
       $("#firstname").focusout(function() {
           check_firstname();
@@ -209,10 +216,11 @@
       $("#address").focusout(function() {
           check_address();
       });
+      $("#resume").focusout(function() {
+          check_resume();
+      });
 
       function check_firstname() {
-
-          var firstname_length = $("#firstname").val().length;
 
           if ($.trim($('#firstname').val()) == '') {
               $("#firstname_error_message").html("Input is blank!");
@@ -224,8 +232,6 @@
       }
 
       function check_lastname() {
-
-          var lastname_length = $("#lastname").val().length;
 
           if ($.trim($('#lastname').val()) == '') {
               $("#lastname_error_message").html("Input is blank!");
@@ -239,7 +245,6 @@
       function check_email() {
 
           var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-          var email_length = $("#email").val().length;
 
           if ($.trim($('#email').val()) == '') {
               $("#email_error_message").html("Input is blank!");
@@ -256,8 +261,6 @@
 
     function check_phone() {
 
-        var phone_length = $("#phone").val().length;
-
         if ($.trim($('#phone').val()) == '') {
             $("#phone_error_message").html("Input is blank!");
             $("#phone_error_message").show();
@@ -269,18 +272,25 @@
 
     function check_address() {
 
-        var phone_length = $("#address").val().length;
-
         if ($.trim($('#address').val()) == '') {
             $("#address_error_message").html("Input is blank!");
             $("#address_error_message").show();
-            error_phone = true;
+            error_address = true;
         } else {
             $("#address_error_message").hide();
         }
     }
 
+    function check_resume() {
 
+        if ($('#resume').get(0).files.length === 0) {
+            $("#resume_error_message").html("No files selected.!");
+            $("#resume_error_message").show();
+            error_resume = true;
+        } else {
+            $("#resume_error_message").hide();
+        }
+    }
       function submit(){
 
           error_firstname = false;
@@ -288,6 +298,7 @@
           error_email = false;
           error_phone = false;
           error_address = false;
+          error_resume = false;
 
 
           check_firstname();
@@ -295,33 +306,35 @@
           check_email();
           check_phone();
           check_address();
+          check_resume();
 
 
-          if (error_firstname == false && error_lastname == false && error_email == false && error_phone == false && error_address == false) {
-            
+          if (error_firstname == false && error_lastname == false && error_email == false && error_phone == false && error_address == false && error_resume == false) {       
+
+        var formData = new FormData(document.getElementById("frmContact"));
+
+        $.ajax({
+          url: "candidate.php",
+          type: "post",
+          dataType: "html",
+          data: formData,
+          cache: false,
+          contentType: false,
+          processData: false,
+          beforeSend:function(){
+            $('#submit').attr('disabled', 'disabled');
+            $('#submit').val('Sending...');
+          },
+          success:function(data){
+            $("#alert_sucess_message").show();
+            $("#alert_error_message").hide();
+            $('#submit').attr('disabled', false);
+            $('#submit').val($('#action').val());            
+            clear();
+          }
+        });
 
 
-
-
-
-              data = $('#frmContact').serialize();
-              
-              $.ajax({
-                  type: "POST",
-                  data: data,
-                  url: "candidate.php",
-                  success: function(r) { alert(r);
-                      if (r == 1) {
-                          $("#alert_sucess_message").show();
-                          $("#alert_error_message").hide();
-                          $('#frmContact')[0].reset();
-                      } else {
-                          alert("Something wrong went throught, please try later.")
-                          $("#alert_sucess_message").hide();
-                          $("#alert_error_message").show();
-                      }
-                  }
-              });
           } else {
               $("#alert_sucess_message").hide();
               $("#alert_error_message").show();

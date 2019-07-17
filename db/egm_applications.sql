@@ -11,6 +11,7 @@ CREATE TABLE tbl_admin(
 
 CREATE TABLE tbl_candidate(
 	candidate_id INT(11) NOT NULL AUTO_INCREMENT,
+	file_id INT(11) NOT NULL,
 	candidate_firstname VARCHAR(50) NOT NULL,
 	candidate_lastname VARCHAR(50) NOT NULL,
 	candidate_email VARCHAR(50) NOT NULL,
@@ -28,4 +29,11 @@ CREATE TABLE tbl_position(
 	position_requirement VARCHAR(1000) NOT NULL,	
     created_date DATETIME NOT NULL,
 	PRIMARY KEY(position_id)
+);
+
+CREATE TABLE tbl_file(
+	file_id INT(11) NOT NULL AUTO_INCREMENT,
+	file_name VARCHAR(100),
+	file_storage_path VARCHAR(100),
+	PRIMARY KEY(file_id)
 );
