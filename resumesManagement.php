@@ -50,6 +50,30 @@
   </nav>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <!-- Contact Section -->
   <section class="page-section" id="apply">
     <div class="container">
@@ -57,119 +81,101 @@
         <div class="col-lg-8 text-center">
           <h2 class="mt-0">Resume Management</h2>
           <hr class="divider my-4">
-          <div class="text-left">
-            
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Handle</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr><tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+require_once "connection.php";
+
+
+
+      $sql="SELECT candidate_id,
+                  candidate_firstname,
+                  candidate_lastname,
+                  candidate_email,
+                  candidate_phone,
+                  candidate_address,
+                  created_date
+                  FROM tbl_candidate";
+      $result=mysqli_query($connection,$sql);
+?>
+  <!-- DataUsers Card-->
+  <div class=" mb-3">
+    <div class="">
+    </div>  
+    <div class="card-body">
+      <div class="">
+        <table class="table table-hover table-condensed table-bordered" id="dataTable">
+          <thead class="p-3 mb-2 bg-light font-weight-bold">
+            <tr>
+              <td>No.</td>
+              <td>First Name</td>
+              <td>Last Name</td>
+              <td>E-mail</td>
+              <td>Phone</td>
+              <td>Address</td>
+              <td>Sent Date</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody >
+            <?php 
+            while ($row=mysqli_fetch_row($result)) {
+              ?>
+              <tr >
+                <td class="text-center"><?php echo $row[0] ?></td>
+                <td class="text-center""><?php echo $row[1] ?></td>
+                <td class="text-center""><?php echo $row[2] ?></td>
+                <td class="text-center""><?php echo $row[3] ?></td>
+                <td class="text-center""><?php echo $row[4] ?></td>
+                <td class="text-center""><?php echo $row[5] ?></td>
+                <td class="text-center""><?php echo $row[6] ?></td>
+
+
+                <td class="text-center""> 
+                  <span class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalView" data-toggle="tooltip" data-placement="bottom" title="View" onclick="addUser('<?php echo $row[0]; ?>')">
+                    <span>Download CV</span>
+                  </span>
+                </td>
+              </tr>
+              <?php 
+            }
+            ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           </div>
         </div>

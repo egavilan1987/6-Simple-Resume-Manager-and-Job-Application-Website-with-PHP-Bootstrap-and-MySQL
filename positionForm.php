@@ -80,12 +80,12 @@
 
               <div class="form-group">
                 <strong>Description <i class="text-danger">*</i></strong>
-                <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter position description" maxlength="1000"></textarea>
+                <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter position description" maxlength="1000" rows="7"></textarea>
                 <div id="description_error_message" class="text-danger"></div>
               </div> 
               <div class="form-group">
                 <strong>Requirement <i class="text-danger">*</i></strong>
-                <textarea type="text" class="form-control" id="requirement" name="requirement" placeholder="Enter position requirement" maxlength="1000"></textarea>
+                <textarea type="text" class="form-control" id="requirement" name="requirement" placeholder="Enter position requirement" maxlength="1000" rows="7"></textarea>
                 <div id="requirement_error_message" class="text-danger"></div>
               </div>
               <button type="button" id="submit" class="btn btn-primary btn-block">SAVE</button>
