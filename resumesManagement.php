@@ -1,3 +1,24 @@
+<?php 
+  session_start();
+  if(isset($_SESSION['username'])){
+
+  require_once "connection.php";
+
+  $sql="SELECT cand.candidate_id,
+              cand.candidate_firstname,
+              cand.candidate_lastname,
+              cand.candidate_email,
+              cand.candidate_phone,
+              cand.candidate_address,
+              cand.created_date,
+              fil.file_name
+            FROM tbl_candidate AS cand 
+            INNER JOIN tbl_file as fil 
+            ON cand.file_id=fil.file_id";
+
+      $result=mysqli_query($connection,$sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +49,6 @@
 <body id="page-top">
 
   <!-- Navigation -->
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-3" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger text-light" href="#page-top">EGM Job Application</a>
@@ -47,139 +67,46 @@
       </div>
     </div>
   </nav>
-  </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- Contact Section -->
+  <!-- Resume Section -->
   <section class="page-section" id="apply">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <h2 class="mt-0">Resume Management</h2>
-          <hr class="divider my-4">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-require_once "connection.php";
-
-
-
-      $sql="SELECT candidate_id,
-                  candidate_firstname,
-                  candidate_lastname,
-                  candidate_email,
-                  candidate_phone,
-                  candidate_address,
-                  created_date
-                  FROM tbl_candidate";
-      $result=mysqli_query($connection,$sql);
-?>
-  <!-- DataUsers Card-->
-  <div class=" mb-3">
-    <div class="">
-    </div>  
-    <div class="card-body">
-      <div class="">
-        <table class="table table-hover table-condensed table-bordered" id="dataTable">
-          <thead class="p-3 mb-2 bg-light font-weight-bold">
-            <tr>
-              <td>No.</td>
-              <td>First Name</td>
-              <td>Last Name</td>
-              <td>E-mail</td>
-              <td>Phone</td>
-              <td>Address</td>
-              <td>Sent Date</td>
-              <td>Actions</td>
-            </tr>
-          </thead>
+      <h2 class="mt-0 text-center">Resume Management</h2>
+      <hr class="divider my-4">
+      <table class="table table-hover table-condensed table-bordered">
+        <thead class="p-3 mb-2 bg-light font-weight-bold">  
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Sent Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
           <tbody >
             <?php 
             while ($row=mysqli_fetch_row($result)) {
               ?>
               <tr >
-                <td class="text-center"><?php echo $row[0] ?></td>
-                <td class="text-center""><?php echo $row[1] ?></td>
-                <td class="text-center""><?php echo $row[2] ?></td>
-                <td class="text-center""><?php echo $row[3] ?></td>
-                <td class="text-center""><?php echo $row[4] ?></td>
-                <td class="text-center""><?php echo $row[5] ?></td>
-                <td class="text-center""><?php echo $row[6] ?></td>
-
-
-                <td class="text-center""> 
-                  <span class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalView" data-toggle="tooltip" data-placement="bottom" title="View" onclick="addUser('<?php echo $row[0]; ?>')">
-                    <span>Download CV</span>
-                  </span>
+                <td><?php echo $row[0] ?></td>
+                <td><?php echo $row[1] ?></td>
+                <td><?php echo $row[2] ?></td>
+                <td><?php echo $row[3] ?></td>
+                <td><?php echo $row[4] ?></td>
+                <td><?php echo $row[5] ?></td>
+                <td><?php echo $row[6] ?></td>
+                <td class="text-center"">              
+                  <a class="btn btn-primary" role="button" href="files/<?php echo $row[7] ?>" class="waves-effect waves-light btn indigo darken-4" download>Download</a>
                 </td>
               </tr>
               <?php 
             }
-            ?>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          </div>
-        </div>
-      </div>
+          ?>
+        </tbody>
+      </table>
     </div>
   </section>
   <br><br>
@@ -204,6 +131,11 @@ require_once "connection.php";
 </body>
 
 </html>
+<?php 
+  }else{
+    header("location:login.html");
+  }
+ ?>
 <script>
   $(function() {
 
@@ -337,7 +269,7 @@ require_once "connection.php";
           check_resume();
 
 
-          if (error_firstname == false && error_lastname == false && error_email == false && error_phone == false && error_address == false && error_resume == false) {       
+        if (error_firstname == false && error_lastname == false && error_email == false && error_phone == false && error_address == false && error_resume == false) {       
 
         var formData = new FormData(document.getElementById("frmContact"));
 
@@ -361,8 +293,6 @@ require_once "connection.php";
             clear();
           }
         });
-
-
           } else {
               $("#alert_sucess_message").hide();
               $("#alert_error_message").show();
@@ -370,12 +300,4 @@ require_once "connection.php";
           }
       }
   });
-
-
-
-
-
-
-
-
 </script>

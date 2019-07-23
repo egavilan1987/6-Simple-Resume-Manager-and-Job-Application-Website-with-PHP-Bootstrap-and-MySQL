@@ -1,3 +1,7 @@
+<?php 
+  session_start();
+  if(isset($_SESSION['username'])){
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +32,6 @@
 <body id="page-top">
 
   <!-- Navigation -->
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-3" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger text-light" href="#page-top">EGM Job Application</a>
@@ -47,10 +50,8 @@
       </div>
     </div>
   </nav>
-  </nav>
 
-
-  <!-- Contact Section -->
+  <!-- Position Section -->
   <section class="page-section" id="apply">
     <div class="container">
       <div class="row justify-content-center">
@@ -77,7 +78,6 @@
                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter position name" maxlength="50">
                 <div id="name_error_message" class="text-danger"></div>
               </div>
-
               <div class="form-group">
                 <strong>Description <i class="text-danger">*</i></strong>
                 <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter position description" maxlength="1000" rows="7"></textarea>
@@ -117,6 +117,11 @@
 </body>
 
 </html>
+<?php 
+  }else{
+    header("location:login.html");
+  }
+ ?>
 <script>
   $(function() {
 
@@ -179,8 +184,6 @@
     error_name = false;
     error_description = false;
     error_requirement = false;
-
-
 
     check_name();
     check_description();

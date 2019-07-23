@@ -11,7 +11,7 @@
       $row=mysqli_fetch_row($result);
       
       $data=array(
-            'position_name' => $row[0],
+            'position_name'        => $row[0],
             'position_description' => $row[1],
             'position_requirement' => $row[2]
             );
