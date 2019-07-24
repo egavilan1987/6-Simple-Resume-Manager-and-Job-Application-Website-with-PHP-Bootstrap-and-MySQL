@@ -168,54 +168,54 @@
           }
       }
 
-    function check_requirement() {
+      function check_requirement() {
 
-        if ($.trim($('#requirement').val()) == '') {
-            $("#requirement_error_message").html("Input is blank!");
-            $("#requirement_error_message").show();
-            error_requirement = true;
+          if ($.trim($('#requirement').val()) == '') {
+              $("#requirement_error_message").html("Input is blank!");
+              $("#requirement_error_message").show();
+              error_requirement = true;
+          } else {
+              $("#requirement_error_message").hide();
+          }
+      }
+
+      function submit(){
+
+      error_name = false;
+      error_description = false;
+      error_requirement = false;
+
+      check_name();
+      check_description();
+      check_requirement();
+
+
+      if (error_name == false && error_description == false && error_requirement == false) {
+
+      data=$('#frmPosition').serialize();
+
+        $.ajax({
+          type:"POST",
+          data:data,
+          url:"positionUpdate.php",
+          success:function(data){
+          if(data==1){
+            $("#alert_sucess_message").show();
+            $("#alert_error_message").hide();
+        }else{
+            $("#alert_sucess_message").hide();
+            $("#alert_error_message").show();
+            }
+          }
+        });
+        return false; 
         } else {
-            $("#requirement_error_message").hide();
+          $("#alert_sucess_message").hide();
+          $("#alert_error_message").show();
+          return false;
+          }
         }
-    }
-
-    function submit(){
-
-    error_name = false;
-    error_description = false;
-    error_requirement = false;
-
-    check_name();
-    check_description();
-    check_requirement();
-
-
-    if (error_name == false && error_description == false && error_requirement == false) {
-
-    data=$('#frmPosition').serialize();
-
-    $.ajax({
-      type:"POST",
-      data:data,
-      url:"positionUpdate.php",
-      success:function(data){
-      if(data==1){
-        $("#alert_sucess_message").show();
-        $("#alert_error_message").hide();
-    }else{
-        $("#alert_sucess_message").hide();
-        $("#alert_error_message").show();
-        }
-      }
-    });
-    return false; 
-    } else {
-      $("#alert_sucess_message").hide();
-      $("#alert_error_message").show();
-      return false;
-      }
-    }
-  });
+      });
 
     function getPosition(){
       $.ajax({

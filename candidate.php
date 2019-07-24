@@ -22,7 +22,7 @@
 
   $file_id = mysqli_insert_id($connection);
 
-  //insert into candidate table
+  //Insert into candidate table
   $query2 = "INSERT INTO tbl_candidate(file_id,
                           candidate_firstname, 
                           candidate_lastname, 

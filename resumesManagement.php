@@ -68,7 +68,7 @@
     </div>
   </nav>
 
-  <!-- Resume Section -->
+  <!-- Resumes Management Section -->
   <section class="page-section" id="apply">
     <div class="container">
       <h2 class="mt-0 text-center">Resume Management</h2>
@@ -86,22 +86,22 @@
             <th scope="col">Actions</th>
           </tr>
         </thead>
-          <tbody >
+        <tbody >
             <?php 
-            while ($row=mysqli_fetch_row($result)) {
+          while ($row=mysqli_fetch_row($result)) {
               ?>
-              <tr >
-                <td><?php echo $row[0] ?></td>
-                <td><?php echo $row[1] ?></td>
-                <td><?php echo $row[2] ?></td>
-                <td><?php echo $row[3] ?></td>
-                <td><?php echo $row[4] ?></td>
-                <td><?php echo $row[5] ?></td>
-                <td><?php echo $row[6] ?></td>
-                <td class="text-center"">              
-                  <a class="btn btn-primary" role="button" href="files/<?php echo $row[7] ?>" class="waves-effect waves-light btn indigo darken-4" download>Download</a>
-                </td>
-              </tr>
+            <tr >
+              <td><?php echo $row[0] ?></td>
+              <td><?php echo $row[1] ?></td>
+              <td><?php echo $row[2] ?></td>
+              <td><?php echo $row[3] ?></td>
+              <td><?php echo $row[4] ?></td>
+              <td><?php echo $row[5] ?></td>
+              <td><?php echo $row[6] ?></td>
+              <td class="text-center"">              
+                <a class="btn btn-primary" role="button" href="files/<?php echo $row[7] ?>" class="waves-effect waves-light btn indigo darken-4" download>Download</a>
+              </td>
+            </tr>
               <?php 
             }
           ?>
@@ -110,6 +110,7 @@
     </div>
   </section>
   <br><br>
+
   <!-- Footer -->
   <footer class="bg-light py-5 fixed-bottom">
     <div class="container">
@@ -251,27 +252,28 @@
             $("#resume_error_message").hide();
         }
     }
-      function submit(){
 
-          error_firstname = false;
-          error_lastname = false;
-          error_email = false;
-          error_phone = false;
-          error_address = false;
-          error_resume = false;
+    function submit(){
 
-
-          check_firstname();
-          check_lastname();
-          check_email();
-          check_phone();
-          check_address();
-          check_resume();
+      error_firstname = false;
+      error_lastname = false;
+      error_email = false;
+      error_phone = false;
+      error_address = false;
+      error_resume = false;
 
 
-        if (error_firstname == false && error_lastname == false && error_email == false && error_phone == false && error_address == false && error_resume == false) {       
+      check_firstname();
+      check_lastname();
+      check_email();
+      check_phone();
+      check_address();
+      check_resume();
 
-        var formData = new FormData(document.getElementById("frmContact"));
+
+    if (error_firstname == false && error_lastname == false && error_email == false && error_phone == false && error_address == false && error_resume == false) {       
+
+      var formData = new FormData(document.getElementById("frmContact"));
 
         $.ajax({
           url: "candidate.php",
@@ -300,4 +302,5 @@
           }
       }
   });
+
 </script>

@@ -97,7 +97,7 @@
                  <i class="fa fa-exclamation-triangle"></i>
                   Please check in on some of the fields below.
                   <button type="button" class="close" data-dismiss="alert" aria-strong="Close">
-                   <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                   </button>
               </div>
               <div id="alert_sucess_message" class="alert alert-success collapse" role="alert">                  
@@ -189,6 +189,12 @@
         submit();
       });
 
+      $(document).keypress(function(e) {
+        if(e.which == 13) {
+           submit();
+        }
+      });
+      
       var error_firstname = false;
       var error_lastname = false;
       var error_email = false;
@@ -286,7 +292,8 @@
             $("#resume_error_message").hide();
         }
     }
-      function submit(){
+
+    function submit(){
 
           error_firstname = false;
           error_lastname = false;
@@ -304,35 +311,35 @@
           check_resume();
 
 
-          if (error_firstname == false && error_lastname == false && error_email == false && error_phone == false && error_address == false && error_resume == false) {       
+        if (error_firstname == false && error_lastname == false && error_email == false && error_phone == false && error_address == false && error_resume == false) {       
 
         var formData = new FormData(document.getElementById("frmContact"));
 
-        $.ajax({
-          url: "candidate.php",
-          type: "post",
-          dataType: "html",
-          data: formData,
-          cache: false,
-          contentType: false,
-          processData: false,
-          beforeSend:function(){
-            $('#submit').attr('disabled', 'disabled');
-            $('#submit').val('Sending...');
-          },
-          success:function(data){
-            $("#alert_sucess_message").show();
-            $("#alert_error_message").hide();
-            $('#submit').attr('disabled', false);
-            $('#submit').val($('#action').val());            
-            clear();
-          }
-        });
-          } else {
-              $("#alert_sucess_message").hide();
-              $("#alert_error_message").show();
-              return false;
-          }
+          $.ajax({
+            url: "candidate.php",
+            type: "post",
+            dataType: "html",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend:function(){
+              $('#submit').attr('disabled', 'disabled');
+              $('#submit').val('Sending...');
+            },
+            success:function(data){
+              $("#alert_sucess_message").show();
+              $("#alert_error_message").hide();
+              $('#submit').attr('disabled', false);
+              $('#submit').val($('#action').val());            
+              clear();
+            }
+          });
+            } else {
+                $("#alert_sucess_message").hide();
+                $("#alert_error_message").show();
+                return false;
+            }
       }
   });
 
