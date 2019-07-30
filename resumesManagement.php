@@ -29,7 +29,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Resume Management System</title>
+  <title>Resumes Management System</title>
 
   <!-- Font Awesome Icons -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

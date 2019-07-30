@@ -5,7 +5,7 @@
   $description  = $_POST['description'];
   $requirement  = $_POST['requirement'];
 
-  //update into candidate table
+  //update candidate table
   $query = "UPDATE tbl_position SET position_name='$name', 
   									position_description='$description', 
   									position_requirement='$requirement', 

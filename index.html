@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Creative - Start Bootstrap Theme</title>
+  <title>Job Application</title>
 
   <!-- Font Awesome Icons -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -174,7 +174,7 @@
       // Get position data
       getPosition();
 
-      // Add the following code if you want the name of the file appear on select
+      // Get the name of the file appear on select
       $(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -302,14 +302,12 @@
           error_address = false;
           error_resume = false;
 
-
           check_firstname();
           check_lastname();
           check_email();
           check_phone();
           check_address();
           check_resume();
-
 
         if (error_firstname == false && error_lastname == false && error_email == false && error_phone == false && error_address == false && error_resume == false) {       
 
@@ -356,6 +354,4 @@
         }
       });
     }
-
-
 </script>
